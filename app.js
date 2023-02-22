@@ -1,26 +1,40 @@
-const inputNumber = Math.round(Math.random() * 100);
-// const inputNumber = 46;
+let randomNumber = Math.round(Math.random() * 100);
 
-console.log(`Загаданное число ${inputNumber}`);
+function guessTheNumber(randomNumber_) {
+  try {
+    let startNumber = 0;
+    let finishNumber = 100;
 
-let targetNumber = +prompt("введите число от одного до 100");
-// let targetNumber = 60;
-let startNum = 0;
-let finishNum = 100;
-let averageNum = (startNum + finishNum) / 2;
+    for (let i = 0; i < finishNumber; i++) {
+      let inputNumber = +prompt(
+        `Программа загадала рандомное число. Ваша задача угадать его. Введите число от ${startNumber} до ${finishNumber}`
+      );
 
+      if (inputNumber == randomNumber_) {
+        alert("Вы угадали!");
+        break;
+      } else if (inputNumber > randomNumber_) {
+        if (finishNumber > inputNumber) {
+          finishNumber = inputNumber;
+        }
 
-if (targetNumber == inputNumber) {
-  console.log("Вы угадали!");
-} else if (averageNum > targetNumber) {
-  finishNum = averageNum;
-  console.log(
-    `Вы ввели число ${targetNumber} и это слишком маленькое значение. Введите число от ${targetNumber} до  ${finishNum}`
-  );
-} else if (averageNum < targetNumber) {
-  startNum = averageNum;
-  console.log(
-    `Вы ввели число ${targetNumber} и это слишком большое значение. Введите число от ${startNum} до ${targetNumber} `
-  );
+        alert(
+          `Вы ввели число ${inputNumber} и это слишком большое значение. Введите число от ${startNumber} до ${finishNumber}`
+        );
+        continue;
+      } else if (inputNumber < randomNumber_) {
+        if (startNumber < inputNumber) {
+          startNumber = inputNumber;
+        }
+        alert(
+          `Вы ввели число ${inputNumber} и это слишком маленькое значение. Введите число от ${startNumber} до ${finishNumber}`
+        );
+        continue;
+      }
+    }
+  } catch (error) {
+    return error.message;
+  }
 }
 
+guessTheNumber(randomNumber);
