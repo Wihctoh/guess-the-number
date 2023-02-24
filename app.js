@@ -6,9 +6,14 @@ function guessTheNumber(randomNumber_) {
     let finishNumber = 100;
 
     for (let i = 0; i < finishNumber; i++) {
-      let inputNumber = +prompt(
+      let inputNumber = prompt(
         `Программа загадала рандомное число. Ваша задача угадать его. Введите число от ${startNumber} до ${finishNumber}`
       );
+      if (inputNumber === null){
+        alert('Вы не угадали'); 
+        break;
+      } 
+        
 
       if (inputNumber == randomNumber_) {
         alert("Вы угадали!");
